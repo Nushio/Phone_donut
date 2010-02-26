@@ -430,6 +430,7 @@ public class InCallScreen extends Activity
             }
         };
 
+private CallFeaturesSetting mSettings;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -947,6 +948,20 @@ public class InCallScreen extends Activity
         // an aborted "Add Call" request), so we should let the mute state
         // be handled by the PhoneUtils phone state change handler.
         final PhoneApp app = PhoneApp.getInstance();
+
+	// Adding Shake to "shake to answer" --Nushio
+        mSettings = CallFeaturesSetting.getInstance(android.preference.PreferenceManager.getDefaultSharedPreferences(this));
+	if(mSettings.mShakeAnswer){
+		ShakeListener mShaker = new ShakeListener(this);
+		mShaker.setOnShakeListener(new ShakeListener.OnShakeListener () {
+				public void onShake()
+				{
+					internalAnswerCall();
+			                app.setRestoreMuteOnInCallResume(false);
+				}
+		});
+	}
+
         if (action.equals(Intent.ACTION_ANSWER)) {
             internalAnswerCall();
             app.setRestoreMuteOnInCallResume(false);

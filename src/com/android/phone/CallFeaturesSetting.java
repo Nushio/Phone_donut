@@ -243,6 +243,11 @@ private static final String BUTTON_VIBRATE_CALL_WAITING = "button_vibrate_call_w
 private CheckBoxPreference mButtonVibCallWaiting;
 static boolean mVibCallWaiting;
 
+// Add settings for Shake-to-Answer, by Nushio
+private static final String BUTTON_SHAKE_TO_ANSWER       = "button_shake_to_answer";
+private CheckBoxPreference mButtonShakeToAnswer;
+static boolean mShakeAnswer;
+
 private static final String BUTTON_ADD_BLACK = "button_add_black";
 private static final String CATEGORY_BLACK   = "cat_black_list";
 private static final String BLFILE           = "blacklist.dat";
@@ -1622,6 +1627,11 @@ mButtonShowOrgan   = (CheckBoxPreference) prefSet.findPreference(BUTTON_SHOW_ORG
 mButtonShowOrgan.setChecked(mShowOrgan);
 mButtonVibCallWaiting = (CheckBoxPreference) prefSet.findPreference(BUTTON_VIBRATE_CALL_WAITING);
 mButtonVibCallWaiting.setChecked(mVibCallWaiting);
+
+// add by nushio for shake-to-answer
+mButtonShakeToAnswer       = (CheckBoxPreference) prefSet.findPreference(BUTTON_SHAKE_TO_ANSWER);
+mButtonShakeToAnswer.setChecked(mShakeAnswer);
+
 mButtonAddBlack = (EditPhoneNumberPreference) prefSet.findPreference(BUTTON_ADD_BLACK);
 mButtonAddBlack.setParentActivity(this, ADD_BLACK_LIST_ID, this);
 mButtonAddBlack.setDialogOnClosedListener(this);
@@ -2065,6 +2075,7 @@ protected void onDestroy() {
     outState.putBoolean(BUTTON_LED_NOTIFY, mButtonLedNotify.isChecked());
     outState.putBoolean(BUTTON_SHOW_ORGAN, mButtonShowOrgan.isChecked());
     outState.putBoolean(BUTTON_VIBRATE_CALL_WAITING, mButtonVibCallWaiting.isChecked());
+    outState.putBoolean(BUTTON_SHAKE_TO_ANSWER, mButtonShakeToAnswer.isChecked());
     outState.commit();
     init(pref);
     super.onDestroy();

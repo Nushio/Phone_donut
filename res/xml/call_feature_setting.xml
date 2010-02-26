@@ -171,6 +171,13 @@
         android:title="@string/led_show_organ"
         android:persistent="false"
         android:summary="@string/led_show_organ_sum"/>
+<!-- added by nushio@fedoraproject.org -->
+    <CheckBoxPreference
+        android:key="button_shake_to_answer"
+        android:title="@string/shake_to_answer"
+        android:persistent="false"
+        android:summary="@string/shake_to_answer_sum"/>
+<!-- end nushio@fedoraproject.org -->
     <PreferenceScreen
         android:key="button_black_list"
         android:title="@string/black_list"
