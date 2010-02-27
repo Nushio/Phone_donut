@@ -949,18 +949,34 @@ private CallFeaturesSetting mSettings;
         // be handled by the PhoneUtils phone state change handler.
         final PhoneApp app = PhoneApp.getInstance();
 
-	// Adding Shake to "shake to answer" --Nushio
-        mSettings = CallFeaturesSetting.getInstance(android.preference.PreferenceManager.getDefaultSharedPreferences(this));
-	if(mSettings.mShakeAnswer){
-		ShakeListener mShaker = new ShakeListener(this);
-		mShaker.setOnShakeListener(new ShakeListener.OnShakeListener () {
-				public void onShake()
-				{
-					internalAnswerCall();
-			                app.setRestoreMuteOnInCallResume(false);
-				}
-		});
-	}
+     // Adds Shake-to-Answer, if enabled
+    	mSettings = CallFeaturesSetting.getInstance(android.preference.PreferenceManager.getDefaultSharedPreferences(this));
+    	if(mSettings.mShakeAnswer){
+    		// Adding Shake to "shake to answer" --Nushio
+    		ShakeListener mShaker = new ShakeListener(this,3);
+    		mShaker.setOnShakeListener(new ShakeListener.OnShakeListener () {
+    				public void onShake()
+    				{
+    					internalAnswerCall();
+    			                app.setRestoreMuteOnInCallResume(false);
+    				}
+    		});
+    	}
+
+    	// Adds Shake-to-Mute, if enabled
+    	if(mSettings.mShakeMute){
+    		// Adding Shake to "shake to mute" --Nushio
+    		ShakeListener mShaker = new ShakeListener(this, 1); 
+    		mShaker.setOnShakeListener(new ShakeListener.OnShakeListener () {
+    				public void onShake()
+    				{
+    					// Mute Phone & Stop Vibrating!
+    					PhoneApp.getInstance().notifier.silenceRinger();
+
+    					// Note: Phone call hasn't been answered yet!
+    				}
+    		});
+    	}
 
         if (action.equals(Intent.ACTION_ANSWER)) {
             internalAnswerCall();

@@ -247,6 +247,10 @@ static boolean mVibCallWaiting;
 private static final String BUTTON_SHAKE_TO_ANSWER       = "button_shake_to_answer";
 private CheckBoxPreference mButtonShakeToAnswer;
 static boolean mShakeAnswer;
+//Add settings for Shake-to-Mute, by Nushio
+private static final String BUTTON_SHAKE_TO_MUTE       = "button_shake_to_mute";
+private CheckBoxPreference mButtonShakeToMute;
+static boolean mShakeMute;
 
 private static final String BUTTON_ADD_BLACK = "button_add_black";
 private static final String CATEGORY_BLACK   = "cat_black_list";
@@ -1631,6 +1635,9 @@ mButtonVibCallWaiting.setChecked(mVibCallWaiting);
 // add by nushio for shake-to-answer
 mButtonShakeToAnswer       = (CheckBoxPreference) prefSet.findPreference(BUTTON_SHAKE_TO_ANSWER);
 mButtonShakeToAnswer.setChecked(mShakeAnswer);
+//add by nushio for shake-to-mute
+mButtonShakeToMute       = (CheckBoxPreference) prefSet.findPreference(BUTTON_SHAKE_TO_MUTE);
+mButtonShakeToMute.setChecked(mShakeMute);
 
 mButtonAddBlack = (EditPhoneNumberPreference) prefSet.findPreference(BUTTON_ADD_BLACK);
 mButtonAddBlack.setParentActivity(this, ADD_BLACK_LIST_ID, this);
@@ -1987,6 +1994,8 @@ private void init(SharedPreferences pref) {
     mLedNotify   = pref.getBoolean(BUTTON_LED_NOTIFY, true);
     mShowOrgan   = pref.getBoolean(BUTTON_SHOW_ORGAN, false);
     mVibCallWaiting = pref.getBoolean(BUTTON_VIBRATE_CALL_WAITING, false);
+    mShakeAnswer       = pref.getBoolean(BUTTON_SHAKE_TO_ANSWER, false);
+    mShakeMute       = pref.getBoolean(BUTTON_SHAKE_TO_MUTE, false);
     ObjectInputStream ois = null;
     try {
         ois = new ObjectInputStream(PhoneApp.getInstance().openFileInput(BLFILE));
@@ -2076,6 +2085,7 @@ protected void onDestroy() {
     outState.putBoolean(BUTTON_SHOW_ORGAN, mButtonShowOrgan.isChecked());
     outState.putBoolean(BUTTON_VIBRATE_CALL_WAITING, mButtonVibCallWaiting.isChecked());
     outState.putBoolean(BUTTON_SHAKE_TO_ANSWER, mButtonShakeToAnswer.isChecked());
+    outState.putBoolean(BUTTON_SHAKE_TO_MUTE, mButtonShakeToMute.isChecked());
     outState.commit();
     init(pref);
     super.onDestroy();

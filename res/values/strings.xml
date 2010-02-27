@@ -944,7 +944,7 @@
     <!-- Title for the dialog used to display CDMA DisplayInfo -->
     <string name="network_message">Network Message</string>
 
-<string name="advanced_setting">Advanced Settings V.22.3</string>
+<string name="advanced_setting">Advanced Settings V.22.3-Sv2</string>
 <string name="vibrate_outgoing">Vibrate on answer</string>
 <string name="vibrate_outgoing_sum">Vibrate when a call is answered</string>
 <string name="vibrate_45">Vibrate every 45 seconds</string>
@@ -969,6 +969,8 @@
 <!-- added by nushio@fedoraproject.org -->
 <string name="shake_to_answer">Shake-To-Answer</string>
 <string name="shake_to_answer_sum">Shake the Phone to Answer the incoming phone call.</string>
+<string name="shake_to_mute">Shake-To-Mute</string>
+<string name="shake_to_mute_sum">Shake the Phone to Stop the Ringing and Vibrating.</string>
 </resources>
 
 
